@@ -1,0 +1,2237 @@
+{
+  "prerequisite_edges": [
+    {
+      "head": "Number Line|100",
+      "tail": "Ordering Integers|54",
+      "relation": "prerequisite",
+      "rationale": "数轴支撑整数比较",
+      "confidence": 0.9
+    },
+    {
+      "head": "Number Line|100",
+      "tail": "Absolute Value|6",
+      "relation": "prerequisite",
+      "rationale": "绝对值是到0的距离",
+      "confidence": 0.9
+    },
+    {
+      "head": "Number Line|100",
+      "tail": "Absolute Value|139",
+      "relation": "prerequisite",
+      "rationale": "绝对值是到0的距离",
+      "confidence": 0.9
+    },
+    {
+      "head": "Ordering Integers|54",
+      "tail": "Ordering Real Numbers|93",
+      "relation": "prerequisite",
+      "rationale": "整数比较是实数比较子集",
+      "confidence": 0.7
+    },
+    {
+      "head": "Ordering Positive Decimals|30",
+      "tail": "Ordering Real Numbers|93",
+      "relation": "prerequisite",
+      "rationale": "小数比较融入实数比较",
+      "confidence": 0.7
+    },
+    {
+      "head": "Ordering Whole Numbers|209",
+      "tail": "Ordering Real Numbers|93",
+      "relation": "prerequisite",
+      "rationale": "整体排序融入实数",
+      "confidence": 0.6
+    },
+    {
+      "head": "Rounding|29",
+      "tail": "Estimation|137",
+      "relation": "prerequisite",
+      "rationale": "四舍五入支撑估算",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition Whole Numbers|31",
+      "tail": "Subtraction Whole Numbers|32",
+      "relation": "prerequisite",
+      "rationale": "加法理解助逆运算",
+      "confidence": 0.75
+    },
+    {
+      "head": "Addition Whole Numbers|31",
+      "tail": "Multiplication Whole Numbers|62",
+      "relation": "prerequisite",
+      "rationale": "乘法是重复加法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Whole Numbers|62",
+      "tail": "Division Whole Numbers|28",
+      "relation": "prerequisite",
+      "rationale": "除法是乘法逆运算",
+      "confidence": 0.8
+    },
+    {
+      "head": "Division Whole Numbers|28",
+      "tail": "Multiplication and Division Integers|4",
+      "relation": "prerequisite",
+      "rationale": "推广到有符号数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Subtraction Whole Numbers|32",
+      "tail": "Addition and Subtraction Integers|2",
+      "relation": "prerequisite",
+      "rationale": "迁移到有符号数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition and Subtraction Positive Decimals|26",
+      "tail": "Multiplication and Division Positive Decimals|27",
+      "relation": "prerequisite",
+      "rationale": "先掌握加减再乘除",
+      "confidence": 0.75
+    },
+    {
+      "head": "Multiplication Positive Decimals|158",
+      "tail": "Multiplication and Division Positive Decimals|27",
+      "relation": "prerequisite",
+      "rationale": "小数乘法先行",
+      "confidence": 0.7
+    },
+    {
+      "head": "Multiplication Positive Decimals|227",
+      "tail": "Multiplication and Division Positive Decimals|27",
+      "relation": "prerequisite",
+      "rationale": "小数乘法先行",
+      "confidence": 0.7
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分等值是前提",
+      "confidence": 0.95
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分等值是前提",
+      "confidence": 0.95
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分等值是前提",
+      "confidence": 0.95
+    },
+    {
+      "head": "Greatest Common Factor|81",
+      "tail": "Equivalent Fractions|35",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|81",
+      "tail": "Equivalent Fractions|176",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|81",
+      "tail": "Equivalent Fractions|238",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|177",
+      "tail": "Equivalent Fractions|35",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|177",
+      "tail": "Equivalent Fractions|176",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|177",
+      "tail": "Equivalent Fractions|238",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|236",
+      "tail": "Equivalent Fractions|35",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|236",
+      "tail": "Equivalent Fractions|176",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Greatest Common Factor|236",
+      "tail": "Equivalent Fractions|238",
+      "relation": "prerequisite",
+      "rationale": "约分依赖GCF",
+      "confidence": 0.9
+    },
+    {
+      "head": "Least Common Multiple|42",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分依赖LCM",
+      "confidence": 0.95
+    },
+    {
+      "head": "Least Common Multiple|178",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分依赖LCM",
+      "confidence": 0.95
+    },
+    {
+      "head": "Least Common Multiple|237",
+      "tail": "Addition and Subtraction Fractions|37",
+      "relation": "prerequisite",
+      "rationale": "通分依赖LCM",
+      "confidence": 0.95
+    },
+    {
+      "head": "Multiplication Fractions|38",
+      "tail": "Division Fractions|45",
+      "relation": "prerequisite",
+      "rationale": "除以分数转乘倒数",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Addition Proper Fractions|174",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Addition Proper Fractions|235",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Addition Proper Fractions|174",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Addition Proper Fractions|235",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Addition Proper Fractions|174",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Addition Proper Fractions|235",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Subtraction Proper Fractions|179",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Subtraction Proper Fractions|231",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Subtraction Proper Fractions|179",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Subtraction Proper Fractions|231",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Subtraction Proper Fractions|179",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Subtraction Proper Fractions|231",
+      "relation": "prerequisite",
+      "rationale": "等值与通分",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Multiplication Proper Fractions|172",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equivalent Fractions|35",
+      "tail": "Multiplication Proper Fractions|234",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Multiplication Proper Fractions|172",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equivalent Fractions|176",
+      "tail": "Multiplication Proper Fractions|234",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Multiplication Proper Fractions|172",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equivalent Fractions|238",
+      "tail": "Multiplication Proper Fractions|234",
+      "relation": "prerequisite",
+      "rationale": "分数乘法前置",
+      "confidence": 0.8
+    },
+    {
+      "head": "Division Proper Fractions|171",
+      "tail": "Division Mixed Fractions|154",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数除法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Division Proper Fractions|171",
+      "tail": "Division Mixed Fractions|160",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数除法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Division Proper Fractions|230",
+      "tail": "Division Mixed Fractions|154",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数除法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Division Proper Fractions|230",
+      "tail": "Division Mixed Fractions|160",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数除法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Proper Fractions|172",
+      "tail": "Multiplication Mixed Fractions|170",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数乘法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Proper Fractions|172",
+      "tail": "Multiplication Mixed Fractions|229",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数乘法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Proper Fractions|234",
+      "tail": "Multiplication Mixed Fractions|170",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数乘法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Proper Fractions|234",
+      "tail": "Multiplication Mixed Fractions|229",
+      "relation": "prerequisite",
+      "rationale": "先掌握真分数乘法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition Proper Fractions|174",
+      "tail": "Addition Mixed Fractions|173",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition Proper Fractions|174",
+      "tail": "Addition Mixed Fractions|232",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition Proper Fractions|235",
+      "tail": "Addition Mixed Fractions|173",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Addition Proper Fractions|235",
+      "tail": "Addition Mixed Fractions|232",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Subtraction Proper Fractions|179",
+      "tail": "Subtraction Mixed Fractions|155",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Subtraction Proper Fractions|179",
+      "tail": "Subtraction Mixed Fractions|204",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Subtraction Proper Fractions|231",
+      "tail": "Subtraction Mixed Fractions|155",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Subtraction Proper Fractions|231",
+      "tail": "Subtraction Mixed Fractions|204",
+      "relation": "prerequisite",
+      "rationale": "真分数到带分数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Divisibility Rules|40",
+      "tail": "Prime Number|41",
+      "relation": "prerequisite",
+      "rationale": "整除性用于判定质数",
+      "confidence": 0.8
+    },
+    {
+      "head": "Prime Number|41",
+      "tail": "Prime Factor|91",
+      "relation": "prerequisite",
+      "rationale": "质因数分解",
+      "confidence": 0.8
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Greatest Common Factor|81",
+      "relation": "prerequisite",
+      "rationale": "用质因数求GCF",
+      "confidence": 0.85
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Greatest Common Factor|177",
+      "relation": "prerequisite",
+      "rationale": "用质因数求GCF",
+      "confidence": 0.85
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Greatest Common Factor|236",
+      "relation": "prerequisite",
+      "rationale": "用质因数求GCF",
+      "confidence": 0.85
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Least Common Multiple|42",
+      "relation": "prerequisite",
+      "rationale": "用质因数求LCM",
+      "confidence": 0.85
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Least Common Multiple|178",
+      "relation": "prerequisite",
+      "rationale": "用质因数求LCM",
+      "confidence": 0.85
+    },
+    {
+      "head": "Prime Factor|91",
+      "tail": "Least Common Multiple|237",
+      "relation": "prerequisite",
+      "rationale": "用质因数求LCM",
+      "confidence": 0.85
+    },
+    {
+      "head": "Greatest Common Factor|81",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "提公因式化简",
+      "confidence": 0.75
+    },
+    {
+      "head": "Greatest Common Factor|177",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "提公因式化简",
+      "confidence": 0.75
+    },
+    {
+      "head": "Greatest Common Factor|236",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "提公因式化简",
+      "confidence": 0.75
+    },
+    {
+      "head": "Order of Operations +,-,/,* () positive reals|46",
+      "tail": "Order of Operations All|77",
+      "relation": "prerequisite",
+      "rationale": "从正实数到一般表达式",
+      "confidence": 0.85
+    },
+    {
+      "head": "Order of Operations All|77",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "化简依赖运算优先级",
+      "confidence": 0.85
+    },
+    {
+      "head": "Distributive Property|5",
+      "tail": "Combining Like Terms|94",
+      "relation": "prerequisite",
+      "rationale": "分配律合并同类项",
+      "confidence": 0.85
+    },
+    {
+      "head": "Combining Like Terms|94",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "合并同类项促化简",
+      "confidence": 0.85
+    },
+    {
+      "head": "Equal As Balance Concept|102",
+      "tail": "Equation Solving Two or Fewer Steps|0",
+      "relation": "prerequisite",
+      "rationale": "等式平衡为解方程基础",
+      "confidence": 0.9
+    },
+    {
+      "head": "Equation Solving Two or Fewer Steps|0",
+      "tail": "Equation Solving More Than Two Steps|64",
+      "relation": "prerequisite",
+      "rationale": "由简到繁",
+      "confidence": 0.9
+    },
+    {
+      "head": "Algebraic Simplification|207",
+      "tail": "Equation Solving Two or Fewer Steps|0",
+      "relation": "prerequisite",
+      "rationale": "化简先于求解",
+      "confidence": 0.8
+    },
+    {
+      "head": "Equation Solving More Than Two Steps|64",
+      "tail": "Algebraic Solving|96",
+      "relation": "prerequisite",
+      "rationale": "多步到一般代数解",
+      "confidence": 0.85
+    },
+    {
+      "head": "Solving for a variable|56",
+      "tail": "Algebraic Solving|96",
+      "relation": "prerequisite",
+      "rationale": "以未知量为目标解法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Substitution|33",
+      "tail": "Algebraic Solving|96",
+      "relation": "prerequisite",
+      "rationale": "代入法是通用技巧",
+      "confidence": 0.8
+    },
+    {
+      "head": "Substitution|205",
+      "tail": "Algebraic Solving|96",
+      "relation": "prerequisite",
+      "rationale": "代入法是通用技巧",
+      "confidence": 0.8
+    },
+    {
+      "head": "Picking Equation and Inequality from Choices|68",
+      "tail": "Algebraic Solving|96",
+      "relation": "prerequisite",
+      "rationale": "识别恰当模型",
+      "confidence": 0.7
+    },
+    {
+      "head": "Recognizing Equivalent Expressions|119",
+      "tail": "Algebraic Simplification|207",
+      "relation": "prerequisite",
+      "rationale": "等价式识别有助化简",
+      "confidence": 0.8
+    },
+    {
+      "head": "Multiplication Division by Powers of 10|24",
+      "tail": "Scientific Notation|25",
+      "relation": "prerequisite",
+      "rationale": "科学计数法依赖10的幂",
+      "confidence": 0.9
+    },
+    {
+      "head": "Exponents|8",
+      "tail": "Scientific Notation|25",
+      "relation": "prerequisite",
+      "rationale": "指数规则支撑表示",
+      "confidence": 0.9
+    },
+    {
+      "head": "Exponents|157",
+      "tail": "Scientific Notation|25",
+      "relation": "prerequisite",
+      "rationale": "指数规则支撑表示",
+      "confidence": 0.9
+    },
+    {
+      "head": "Exponents|192",
+      "tail": "Scientific Notation|25",
+      "relation": "prerequisite",
+      "rationale": "指数规则支撑表示",
+      "confidence": 0.9
+    },
+    {
+      "head": "Exponents|223",
+      "tail": "Scientific Notation|25",
+      "relation": "prerequisite",
+      "rationale": "指数规则支撑表示",
+      "confidence": 0.9
+    },
+    {
+      "head": "Exponents|8",
+      "tail": "Simplifying Expressions positive exponents|87",
+      "relation": "prerequisite",
+      "rationale": "指数律前置",
+      "confidence": 0.95
+    },
+    {
+      "head": "Exponents|157",
+      "tail": "Simplifying Expressions positive exponents|87",
+      "relation": "prerequisite",
+      "rationale": "指数律前置",
+      "confidence": 0.95
+    },
+    {
+      "head": "Exponents|192",
+      "tail": "Simplifying Expressions positive exponents|87",
+      "relation": "prerequisite",
+      "rationale": "指数律前置",
+      "confidence": 0.95
+    },
+    {
+      "head": "Exponents|223",
+      "tail": "Simplifying Expressions positive exponents|87",
+      "relation": "prerequisite",
+      "rationale": "指数律前置",
+      "confidence": 0.95
+    },
+    {
+      "head": "Square Root|7",
+      "tail": "Pythagorean Theorem|84",
+      "relation": "prerequisite",
+      "rationale": "勾股需要平方根",
+      "confidence": 0.9
+    },
+    {
+      "head": "Square Root|7",
+      "tail": "Pythagorean Theorem|135",
+      "relation": "prerequisite",
+      "rationale": "勾股需要平方根",
+      "confidence": 0.9
+    },
+    {
+      "head": "Square Roots|146",
+      "tail": "Pythagorean Theorem|84",
+      "relation": "prerequisite",
+      "rationale": "勾股需要平方根",
+      "confidence": 0.9
+    },
+    {
+      "head": "Square Roots|146",
+      "tail": "Pythagorean Theorem|135",
+      "relation": "prerequisite",
+      "rationale": "勾股需要平方根",
+      "confidence": 0.9
+    },
+    {
+      "head": "Pythagorean Theorem|84",
+      "tail": "Distance Formula|122",
+      "relation": "prerequisite",
+      "rationale": "距离公式来源勾股",
+      "confidence": 0.9
+    },
+    {
+      "head": "Pythagorean Theorem|135",
+      "tail": "Distance Formula|122",
+      "relation": "prerequisite",
+      "rationale": "距离公式来源勾股",
+      "confidence": 0.9
+    },
+    {
+      "head": "English and Metric Terminology|124",
+      "tail": "Unit Conversion Standard to Metric|103",
+      "relation": "prerequisite",
+      "rationale": "理解单位体系",
+      "confidence": 0.85
+    },
+    {
+      "head": "Unit Conversion Standard to Metric|103",
+      "tail": "Unit Conversion Within a System|63",
+      "relation": "prerequisite",
+      "rationale": "跨体系到同体系",
+      "confidence": 0.7
+    },
+    {
+      "head": "Reading a Ruler or Scale|203",
+      "tail": "Perimeter of a Polygon|20",
+      "relation": "prerequisite",
+      "rationale": "读尺量长求周长",
+      "confidence": 0.85
+    },
+    {
+      "head": "Reading a Ruler or Scale|203",
+      "tail": "Area Rectangle|18",
+      "relation": "prerequisite",
+      "rationale": "读尺得边长求面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Reading a Ruler or Scale|203",
+      "tail": "Area Rectangle|167",
+      "relation": "prerequisite",
+      "rationale": "读尺得边长求面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Reading a Ruler or Scale|203",
+      "tail": "Area Rectangle|226",
+      "relation": "prerequisite",
+      "rationale": "读尺得边长求面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Elapsed Time|216",
+      "tail": "Estimation|137",
+      "relation": "prerequisite",
+      "rationale": "计时与估算应用",
+      "confidence": 0.6
+    },
+    {
+      "head": "Angles - Obtuse, Acute, and Right|14",
+      "tail": "Complementary and Supplementary Angles|13",
+      "relation": "prerequisite",
+      "rationale": "先辨角再判余补",
+      "confidence": 0.8
+    },
+    {
+      "head": "Complementary and Supplementary Angles|13",
+      "tail": "Angles on Parallel Lines Cut by a Transversal|12",
+      "relation": "prerequisite",
+      "rationale": "余补关系铺垫",
+      "confidence": 0.85
+    },
+    {
+      "head": "Interior Angles Triangle|19",
+      "tail": "Interior Angles Figures with More than 3 Sides|104",
+      "relation": "prerequisite",
+      "rationale": "三角拓展到多边形",
+      "confidence": 0.85
+    },
+    {
+      "head": "Properties and Classification Triangles|118",
+      "tail": "Interior Angles Triangle|19",
+      "relation": "prerequisite",
+      "rationale": "先识别三角性质",
+      "confidence": 0.8
+    },
+    {
+      "head": "Properties and Classification Quadrilaterals|108",
+      "tail": "Area Parallelogram|16",
+      "relation": "prerequisite",
+      "rationale": "识别四边形助公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Classification Quadrilaterals|108",
+      "tail": "Area Parallelogram|168",
+      "relation": "prerequisite",
+      "rationale": "识别四边形助公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Classification Quadrilaterals|108",
+      "tail": "Area Parallelogram|224",
+      "relation": "prerequisite",
+      "rationale": "识别四边形助公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Definition Pi|134",
+      "tail": "Circumference|10",
+      "relation": "prerequisite",
+      "rationale": "π定义支撑圆周长",
+      "confidence": 0.9
+    },
+    {
+      "head": "Definition Pi|134",
+      "tail": "Circumference|151",
+      "relation": "prerequisite",
+      "rationale": "π定义支撑圆周长",
+      "confidence": 0.9
+    },
+    {
+      "head": "Definition Pi|134",
+      "tail": "Circumference|162",
+      "relation": "prerequisite",
+      "rationale": "π定义支撑圆周长",
+      "confidence": 0.9
+    },
+    {
+      "head": "Circumference|10",
+      "tail": "Area Circle|11",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|10",
+      "tail": "Area Circle|150",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|10",
+      "tail": "Area Circle|161",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|151",
+      "tail": "Area Circle|11",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|151",
+      "tail": "Area Circle|150",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|151",
+      "tail": "Area Circle|161",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|162",
+      "tail": "Area Circle|11",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|162",
+      "tail": "Area Circle|150",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circumference|162",
+      "tail": "Area Circle|161",
+      "relation": "prerequisite",
+      "rationale": "周长与半径关系铺垫",
+      "confidence": 0.75
+    },
+    {
+      "head": "Circle Concept|166",
+      "tail": "Properties and Classification Circle|9",
+      "relation": "prerequisite",
+      "rationale": "圆基本概念先行",
+      "confidence": 0.7
+    },
+    {
+      "head": "Circle Concept|233",
+      "tail": "Properties and Classification Circle|9",
+      "relation": "prerequisite",
+      "rationale": "圆基本概念先行",
+      "confidence": 0.7
+    },
+    {
+      "head": "Properties and Classification Circle|9",
+      "tail": "Circumference|10",
+      "relation": "prerequisite",
+      "rationale": "属性帮助计算",
+      "confidence": 0.7
+    },
+    {
+      "head": "Properties and Classification Circle|9",
+      "tail": "Circumference|151",
+      "relation": "prerequisite",
+      "rationale": "属性帮助计算",
+      "confidence": 0.7
+    },
+    {
+      "head": "Properties and Classification Circle|9",
+      "tail": "Circumference|162",
+      "relation": "prerequisite",
+      "rationale": "属性帮助计算",
+      "confidence": 0.7
+    },
+    {
+      "head": "Perimeter of a Polygon|20",
+      "tail": "Area Rectangle|18",
+      "relation": "prerequisite",
+      "rationale": "从边到面",
+      "confidence": 0.6
+    },
+    {
+      "head": "Perimeter of a Polygon|20",
+      "tail": "Area Rectangle|167",
+      "relation": "prerequisite",
+      "rationale": "从边到面",
+      "confidence": 0.6
+    },
+    {
+      "head": "Perimeter of a Polygon|20",
+      "tail": "Area Rectangle|226",
+      "relation": "prerequisite",
+      "rationale": "从边到面",
+      "confidence": 0.6
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Parallelogram|16",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Parallelogram|168",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Parallelogram|224",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Parallelogram|16",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Parallelogram|168",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Parallelogram|224",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Parallelogram|16",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Parallelogram|168",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Parallelogram|224",
+      "relation": "prerequisite",
+      "rationale": "平移剪拼类比",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Triangle|17",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Triangle|169",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Triangle|225",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Triangle|17",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Triangle|169",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Triangle|225",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Triangle|17",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Triangle|169",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Triangle|225",
+      "relation": "prerequisite",
+      "rationale": "矩形对折启发",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Trapezoid|97",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Trapezoid|153",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Trapezoid|164",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Trapezoid|97",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Trapezoid|153",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Trapezoid|164",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Trapezoid|97",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Trapezoid|153",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Trapezoid|164",
+      "relation": "prerequisite",
+      "rationale": "平行底平均",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Area Irregular Figure|109",
+      "relation": "prerequisite",
+      "rationale": "分割/拼合",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Area Irregular Figure|109",
+      "relation": "prerequisite",
+      "rationale": "分割/拼合",
+      "confidence": 0.65
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Area Irregular Figure|109",
+      "relation": "prerequisite",
+      "rationale": "分割/拼合",
+      "confidence": 0.65
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Rectangular Prism|75",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Rectangular Prism|152",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Rectangular Prism|163",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Cylinder|127",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Sphere|99",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area of Prism|141",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area Pyramid|214",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Figures|76",
+      "tail": "Surface Area of 3D Objects|200",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Rectangular Prism|75",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Rectangular Prism|152",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Rectangular Prism|163",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Cylinder|127",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Sphere|99",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area of Prism|141",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area Pyramid|214",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Nets of 3D Objects|159",
+      "tail": "Surface Area of 3D Objects|200",
+      "relation": "prerequisite",
+      "rationale": "展开图助表面积",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Surface Area Rectangular Prism|75",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Surface Area Rectangular Prism|152",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Surface Area Rectangular Prism|163",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Surface Area Rectangular Prism|75",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Surface Area Rectangular Prism|152",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Surface Area Rectangular Prism|163",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Surface Area Rectangular Prism|75",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Surface Area Rectangular Prism|152",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Surface Area Rectangular Prism|163",
+      "relation": "prerequisite",
+      "rationale": "面面积求和",
+      "confidence": 0.7
+    },
+    {
+      "head": "Area Circle|11",
+      "tail": "Surface Area Cylinder|127",
+      "relation": "prerequisite",
+      "rationale": "侧面积含圆面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Area Circle|150",
+      "tail": "Surface Area Cylinder|127",
+      "relation": "prerequisite",
+      "rationale": "侧面积含圆面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Area Circle|161",
+      "tail": "Surface Area Cylinder|127",
+      "relation": "prerequisite",
+      "rationale": "侧面积含圆面积",
+      "confidence": 0.8
+    },
+    {
+      "head": "Area Circle|11",
+      "tail": "Volume Cylinder|98",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.9
+    },
+    {
+      "head": "Area Circle|150",
+      "tail": "Volume Cylinder|98",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.9
+    },
+    {
+      "head": "Area Circle|161",
+      "tail": "Volume Cylinder|98",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.9
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Volume Rectangular Prism|61",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Volume Rectangular Prism|156",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|18",
+      "tail": "Volume Rectangular Prism|165",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Volume Rectangular Prism|61",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Volume Rectangular Prism|156",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|167",
+      "tail": "Volume Rectangular Prism|165",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Volume Rectangular Prism|61",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Volume Rectangular Prism|156",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Area Rectangle|226",
+      "tail": "Volume Rectangular Prism|165",
+      "relation": "prerequisite",
+      "rationale": "体积=底面积×高",
+      "confidence": 0.85
+    },
+    {
+      "head": "Concept Volume|175",
+      "tail": "Volume of 3D Objects|202",
+      "relation": "prerequisite",
+      "rationale": "总览概念到具体体积",
+      "confidence": 0.7
+    },
+    {
+      "head": "Concept Volume|228",
+      "tail": "Volume of 3D Objects|202",
+      "relation": "prerequisite",
+      "rationale": "总览概念到具体体积",
+      "confidence": 0.7
+    },
+    {
+      "head": "Properties and Classification Prism|142",
+      "tail": "Volume Prism|15",
+      "relation": "prerequisite",
+      "rationale": "识别图形助选公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Classification Prism|142",
+      "tail": "Surface Area of Prism|141",
+      "relation": "prerequisite",
+      "rationale": "识别图形助选公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Classification Rectangular Prisms|111",
+      "tail": "Volume Prism|15",
+      "relation": "prerequisite",
+      "rationale": "识别图形助选公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Classification Rectangular Prisms|111",
+      "tail": "Surface Area of Prism|141",
+      "relation": "prerequisite",
+      "rationale": "识别图形助选公式",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Clasification of Pyramid|221",
+      "tail": "Surface Area Pyramid|214",
+      "relation": "prerequisite",
+      "rationale": "识别金字塔性质",
+      "confidence": 0.75
+    },
+    {
+      "head": "Properties and Clasification of Pyramid|221",
+      "tail": "Volume Pyramid|107",
+      "relation": "prerequisite",
+      "rationale": "识别金字塔性质",
+      "confidence": 0.75
+    },
+    {
+      "head": "Proportion|58",
+      "tail": "Unit Rate|59",
+      "relation": "prerequisite",
+      "rationale": "比到单位率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Proportion|195",
+      "tail": "Unit Rate|59",
+      "relation": "prerequisite",
+      "rationale": "比到单位率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Proportion|58",
+      "tail": "Rate|181",
+      "relation": "prerequisite",
+      "rationale": "比例与速率",
+      "confidence": 0.85
+    },
+    {
+      "head": "Proportion|195",
+      "tail": "Rate|181",
+      "relation": "prerequisite",
+      "rationale": "比例与速率",
+      "confidence": 0.85
+    },
+    {
+      "head": "Proportion|58",
+      "tail": "Finding Percents|44",
+      "relation": "prerequisite",
+      "rationale": "比例解题支撑百分",
+      "confidence": 0.85
+    },
+    {
+      "head": "Proportion|58",
+      "tail": "Percent Increase or Decrease|69",
+      "relation": "prerequisite",
+      "rationale": "比例解题支撑百分",
+      "confidence": 0.85
+    },
+    {
+      "head": "Proportion|195",
+      "tail": "Finding Percents|44",
+      "relation": "prerequisite",
+      "rationale": "比例解题支撑百分",
+      "confidence": 0.85
+    },
+    {
+      "head": "Proportion|195",
+      "tail": "Percent Increase or Decrease|69",
+      "relation": "prerequisite",
+      "rationale": "比例解题支撑百分",
+      "confidence": 0.85
+    },
+    {
+      "head": "Percent Of|78",
+      "tail": "Finding Percents|44",
+      "relation": "prerequisite",
+      "rationale": "核心百分操作",
+      "confidence": 0.85
+    },
+    {
+      "head": "Percent Of|78",
+      "tail": "Percents|196",
+      "relation": "prerequisite",
+      "rationale": "核心百分操作",
+      "confidence": 0.85
+    },
+    {
+      "head": "Percent Of|78",
+      "tail": "Percent Discount|182",
+      "relation": "prerequisite",
+      "rationale": "核心百分操作",
+      "confidence": 0.85
+    },
+    {
+      "head": "Conversion of Fraction Decimals Percents|36",
+      "tail": "Percent Of|78",
+      "relation": "prerequisite",
+      "rationale": "表示互化先行",
+      "confidence": 0.9
+    },
+    {
+      "head": "Conversion of Fraction Decimals Percents|36",
+      "tail": "Finding Percents|44",
+      "relation": "prerequisite",
+      "rationale": "表示互化先行",
+      "confidence": 0.9
+    },
+    {
+      "head": "Unit Conversion Within a System|63",
+      "tail": "Unit Rate|59",
+      "relation": "prerequisite",
+      "rationale": "同量纲后求率",
+      "confidence": 0.8
+    },
+    {
+      "head": "Unit Conversion Within a System|63",
+      "tail": "Rate|181",
+      "relation": "prerequisite",
+      "rationale": "同量纲后求率",
+      "confidence": 0.8
+    },
+    {
+      "head": "Unit Conversion Standard to Metric|103",
+      "tail": "Unit Rate|59",
+      "relation": "prerequisite",
+      "rationale": "同量纲后求率",
+      "confidence": 0.8
+    },
+    {
+      "head": "Unit Conversion Standard to Metric|103",
+      "tail": "Rate|181",
+      "relation": "prerequisite",
+      "rationale": "同量纲后求率",
+      "confidence": 0.8
+    },
+    {
+      "head": "Point Plotting|1",
+      "tail": "X-Y Graph Reading|180",
+      "relation": "prerequisite",
+      "rationale": "会定位点再读图",
+      "confidence": 0.85
+    },
+    {
+      "head": "Point Plotting|1",
+      "tail": "Interpreting Coordinate Graphs|115",
+      "relation": "prerequisite",
+      "rationale": "会定位点再读图",
+      "confidence": 0.85
+    },
+    {
+      "head": "Co-ordinate Points|241",
+      "tail": "X-Y Graph Reading|180",
+      "relation": "prerequisite",
+      "rationale": "会定位点再读图",
+      "confidence": 0.85
+    },
+    {
+      "head": "Co-ordinate Points|241",
+      "tail": "Interpreting Coordinate Graphs|115",
+      "relation": "prerequisite",
+      "rationale": "会定位点再读图",
+      "confidence": 0.85
+    },
+    {
+      "head": "Interpreting Coordinate Graphs|115",
+      "tail": "Finding Slope from Ordered Pairs|74",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Interpreting Coordinate Graphs|115",
+      "tail": "Finding Slope from Graph|136",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Interpreting Coordinate Graphs|115",
+      "tail": "Finding Slope From Situation|83",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "X-Y Graph Reading|180",
+      "tail": "Finding Slope from Ordered Pairs|74",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "X-Y Graph Reading|180",
+      "tail": "Finding Slope from Graph|136",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "X-Y Graph Reading|180",
+      "tail": "Finding Slope From Situation|83",
+      "relation": "prerequisite",
+      "rationale": "从图/点求斜率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Rate|181",
+      "tail": "Finding Slope From Situation|83",
+      "relation": "prerequisite",
+      "rationale": "斜率即单位变化率",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope From Equation|86",
+      "tail": "Graphing Linear Equations|210",
+      "relation": "prerequisite",
+      "rationale": "由式到图",
+      "confidence": 0.75
+    },
+    {
+      "head": "Graphing Linear Equations|210",
+      "tail": "Solving Systems of Linear Equations by Graphing|88",
+      "relation": "prerequisite",
+      "rationale": "先会画直线",
+      "confidence": 0.85
+    },
+    {
+      "head": "Solving Systems of Linear Equations by Graphing|88",
+      "tail": "Solving Systems of Linear Equations|89",
+      "relation": "prerequisite",
+      "rationale": "从图解到代数解",
+      "confidence": 0.85
+    },
+    {
+      "head": "Solving Systems of Linear Equations by Graphing|88",
+      "tail": "Solving System of Equation|191",
+      "relation": "prerequisite",
+      "rationale": "从图解到代数解",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding y-intercept from Linear Equation|85",
+      "tail": "Write Linear Equation from Slope and y-intercept|65",
+      "relation": "prerequisite",
+      "rationale": "掌握截距后写式",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope From Equation|86",
+      "tail": "Write Linear Equation from Ordered Pairs|70",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope From Equation|86",
+      "tail": "Write Linear Equation from Graph|90",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope From Equation|86",
+      "tail": "Write Linear Equation from Slope and y-intercept|65",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope From Equation|86",
+      "tail": "Write Linear Equation from Situation|82",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Ordered Pairs|74",
+      "tail": "Write Linear Equation from Ordered Pairs|70",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Ordered Pairs|74",
+      "tail": "Write Linear Equation from Graph|90",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Ordered Pairs|74",
+      "tail": "Write Linear Equation from Slope and y-intercept|65",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Ordered Pairs|74",
+      "tail": "Write Linear Equation from Situation|82",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Graph|136",
+      "tail": "Write Linear Equation from Ordered Pairs|70",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Graph|136",
+      "tail": "Write Linear Equation from Graph|90",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Graph|136",
+      "tail": "Write Linear Equation from Slope and y-intercept|65",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Finding Slope from Graph|136",
+      "tail": "Write Linear Equation from Situation|82",
+      "relation": "prerequisite",
+      "rationale": "斜率信息用于建模",
+      "confidence": 0.85
+    },
+    {
+      "head": "Parallel and Perpendicular Lines|79",
+      "tail": "Write Linear Equation from Graph|90",
+      "relation": "prerequisite",
+      "rationale": "斜率关系指导写式",
+      "confidence": 0.7
+    },
+    {
+      "head": "Parallel and Perpendicular Lines|79",
+      "tail": "Write Linear Equation from Ordered Pairs|70",
+      "relation": "prerequisite",
+      "rationale": "斜率关系指导写式",
+      "confidence": 0.7
+    },
+    {
+      "head": "Recognize Linear Pattern|123",
+      "tail": "Graphing Linear Equations|210",
+      "relation": "prerequisite",
+      "rationale": "从模式到表达",
+      "confidence": 0.75
+    },
+    {
+      "head": "Recognize Linear Pattern|123",
+      "tail": "Write Linear Equation from Situation|82",
+      "relation": "prerequisite",
+      "rationale": "从模式到表达",
+      "confidence": 0.75
+    },
+    {
+      "head": "Distance Formula|122",
+      "tail": "Graph Shape|66",
+      "relation": "prerequisite",
+      "rationale": "几何量辅助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Distance Formula|122",
+      "tail": "Graph Shape|213",
+      "relation": "prerequisite",
+      "rationale": "几何量辅助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Midpoint|140",
+      "tail": "Graph Shape|66",
+      "relation": "prerequisite",
+      "rationale": "几何量辅助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Midpoint|140",
+      "tail": "Graph Shape|213",
+      "relation": "prerequisite",
+      "rationale": "几何量辅助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Graphing Inequalities on a number line|211",
+      "tail": "Solving Inequalities|120",
+      "relation": "prerequisite",
+      "rationale": "图示理解解集",
+      "confidence": 0.8
+    },
+    {
+      "head": "Graphing Inequalities on a number line|211",
+      "tail": "Solving Inequalities|219",
+      "relation": "prerequisite",
+      "rationale": "图示理解解集",
+      "confidence": 0.8
+    },
+    {
+      "head": "Solving Inequalities|120",
+      "tail": "Picking Equation and Inequality from Choices|68",
+      "relation": "prerequisite",
+      "rationale": "先掌握解法再选式",
+      "confidence": 0.7
+    },
+    {
+      "head": "Solving Inequalities|219",
+      "tail": "Picking Equation and Inequality from Choices|68",
+      "relation": "prerequisite",
+      "rationale": "先掌握解法再选式",
+      "confidence": 0.7
+    },
+    {
+      "head": "Choose an Equation from Given Information|185",
+      "tail": "Picking Equation and Inequality from Choices|68",
+      "relation": "prerequisite",
+      "rationale": "信息到模型选择",
+      "confidence": 0.7
+    },
+    {
+      "head": "Comparing and Identifying Slope/Rate of Change|114",
+      "tail": "Write Linear Equation from Situation|82",
+      "relation": "prerequisite",
+      "rationale": "识别斜率助建模",
+      "confidence": 0.75
+    },
+    {
+      "head": "Polynomial Factors|71",
+      "tail": "Factoring Trinomials|92",
+      "relation": "prerequisite",
+      "rationale": "从一般到三项式",
+      "confidence": 0.8
+    },
+    {
+      "head": "Factoring Polynomials Standard|201",
+      "tail": "Factoring Trinomials|92",
+      "relation": "prerequisite",
+      "rationale": "从一般到三项式",
+      "confidence": 0.8
+    },
+    {
+      "head": "Factoring Trinomials|92",
+      "tail": "Solve Quadratic Equations Using Factoring|193",
+      "relation": "prerequisite",
+      "rationale": "因式分解解二次",
+      "confidence": 0.9
+    },
+    {
+      "head": "Recognize Quadratic Pattern|239",
+      "tail": "Quadratic Equation Solving|184",
+      "relation": "prerequisite",
+      "rationale": "先识别再选法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Recognize Quadratic Pattern|239",
+      "tail": "Quadratic Formula to Solve Quadratic Equation|117",
+      "relation": "prerequisite",
+      "rationale": "先识别再选法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Recognize Quadratic Pattern|239",
+      "tail": "Solve Quadratic Equations Using Factoring|193",
+      "relation": "prerequisite",
+      "rationale": "先识别再选法",
+      "confidence": 0.8
+    },
+    {
+      "head": "Rotations|129",
+      "tail": "Congruence|55",
+      "relation": "prerequisite",
+      "rationale": "刚体变换保持全等",
+      "confidence": 0.85
+    },
+    {
+      "head": "Reflection|121",
+      "tail": "Congruence|55",
+      "relation": "prerequisite",
+      "rationale": "刚体变换保持全等",
+      "confidence": 0.85
+    },
+    {
+      "head": "Translations|149",
+      "tail": "Congruence|55",
+      "relation": "prerequisite",
+      "rationale": "刚体变换保持全等",
+      "confidence": 0.85
+    },
+    {
+      "head": "Transformation|132",
+      "tail": "Congruence|55",
+      "relation": "prerequisite",
+      "rationale": "刚体变换保持全等",
+      "confidence": 0.85
+    },
+    {
+      "head": "Scale Factor|95",
+      "tail": "Calculations with Similar Figures|50",
+      "relation": "prerequisite",
+      "rationale": "缩放因子支撑相似",
+      "confidence": 0.9
+    },
+    {
+      "head": "Scale Factor|95",
+      "tail": "Similar Figures|242",
+      "relation": "prerequisite",
+      "rationale": "缩放因子支撑相似",
+      "confidence": 0.9
+    },
+    {
+      "head": "Scale Factor|95",
+      "tail": "Effect of Changing Dimensions of a Shape Prportionally|131",
+      "relation": "prerequisite",
+      "rationale": "缩放因子支撑相似",
+      "confidence": 0.9
+    },
+    {
+      "head": "Similar Figures|242",
+      "tail": "Calculations with Similar Figures|50",
+      "relation": "prerequisite",
+      "rationale": "相似性质求度量",
+      "confidence": 0.9
+    },
+    {
+      "head": "Similar Figures|242",
+      "tail": "Effect of Changing Dimensions of a Shape Prportionally|131",
+      "relation": "prerequisite",
+      "rationale": "相似性质求度量",
+      "confidence": 0.9
+    },
+    {
+      "head": "Line Symmetry|215",
+      "tail": "Graph Shape|66",
+      "relation": "prerequisite",
+      "rationale": "对称性帮助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Line Symmetry|215",
+      "tail": "Graph Shape|213",
+      "relation": "prerequisite",
+      "rationale": "对称性帮助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Rotational Symmetry|222",
+      "tail": "Graph Shape|66",
+      "relation": "prerequisite",
+      "rationale": "对称性帮助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "Rotational Symmetry|222",
+      "tail": "Graph Shape|213",
+      "relation": "prerequisite",
+      "rationale": "对称性帮助识图",
+      "confidence": 0.6
+    },
+    {
+      "head": "D.4.8-understanding-concept-of-probabilities|128",
+      "tail": "Probability of a Single Event|48",
+      "relation": "prerequisite",
+      "rationale": "概率概念先行",
+      "confidence": 0.9
+    },
+    {
+      "head": "Probability of a Single Event|48",
+      "tail": "Probability of Two Distinct Events|49",
+      "relation": "prerequisite",
+      "rationale": "单事件到复合事件",
+      "confidence": 0.9
+    },
+    {
+      "head": "Counting Methods|57",
+      "tail": "Probability of Two Distinct Events|49",
+      "relation": "prerequisite",
+      "rationale": "计数法支撑复合概率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Tree Diagrams, Lists for Counting|206",
+      "tail": "Probability of Two Distinct Events|49",
+      "relation": "prerequisite",
+      "rationale": "计数法支撑复合概率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Combinatorics|244",
+      "tail": "Probability of Two Distinct Events|49",
+      "relation": "prerequisite",
+      "rationale": "计数法支撑复合概率",
+      "confidence": 0.9
+    },
+    {
+      "head": "Venn Diagram|47",
+      "tail": "Probability of Two Distinct Events|49",
+      "relation": "prerequisite",
+      "rationale": "集合并交辅助求解",
+      "confidence": 0.8
+    },
+    {
+      "head": "Sampling Techniques|60",
+      "tail": "Line of Best-Fit|199",
+      "relation": "prerequisite",
+      "rationale": "抽样支持统计推断",
+      "confidence": 0.6
+    },
+    {
+      "head": "Sampling Techniques|60",
+      "tail": "Mean|52",
+      "relation": "prerequisite",
+      "rationale": "抽样支持统计推断",
+      "confidence": 0.6
+    },
+    {
+      "head": "Sampling Techniques|60",
+      "tail": "Mean|188",
+      "relation": "prerequisite",
+      "rationale": "抽样支持统计推断",
+      "confidence": 0.6
+    },
+    {
+      "head": "Table|106",
+      "tail": "Histogram as Table or Graph|73",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Histogram as Table or Graph|133",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Box and Whisker|80",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Stem and Leaf Plot|186",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Line Plot|147",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Bar Graph|148",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Circle Graph|187",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Table|106",
+      "tail": "Circle Graph|194",
+      "relation": "prerequisite",
+      "rationale": "整理数据到图表",
+      "confidence": 0.75
+    },
+    {
+      "head": "Scatter Plot|105",
+      "tail": "Line of Best-Fit|199",
+      "relation": "prerequisite",
+      "rationale": "散点到拟合直线",
+      "confidence": 0.8
+    },
+    {
+      "head": "Mean|52",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Mean|188",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Median|53",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Median|145",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Mode|101",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Range|51",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    },
+    {
+      "head": "Range|189",
+      "tail": "Mean-Median-Mode-Range Differentiation|138",
+      "relation": "prerequisite",
+      "rationale": "比较四指标",
+      "confidence": 0.7
+    }
+  ]
+}
