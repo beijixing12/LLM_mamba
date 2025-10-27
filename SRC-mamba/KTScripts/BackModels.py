@@ -221,6 +221,9 @@ class CoKT(nn.Module):
         concat_input = torch.cat((intra_x[:, -1:], o), dim=-1)
         if intra_h_p is not None:
             hidden = intra_h_p[:, -1, :-1].unsqueeze(0)
+            # ``torch.cat`` and masked indexing may return non-contiguous tensors,
+            # so ensure the GRU receives a contiguous hidden state.
+            hidden = hidden.contiguous()
         else:
             hidden = None
         intra_h_next, hidden_next = self.rnn(concat_input, hidden)

@@ -218,7 +218,17 @@ class SRC(nn.Module):
         if score is None:
             score = torch.zeros_like(x_embed[..., 0], dtype=x_embed.dtype, device=x_embed.device)
         score = score.to(x_embed.dtype)
-        x = self.l1(torch.cat((x_embed, score.unsqueeze(-1)), -1))
+        target_shape = x_embed.shape[:-1] + (1,)
+        score_dims = score.dim()
+        target_dims = len(target_shape)
+        if score_dims < target_dims:
+            for _ in range(target_dims - score_dims):
+                score = score.unsqueeze(-1)
+        elif score_dims > target_dims:
+            score = score.reshape(target_shape)
+        elif score.shape != target_shape:
+            score = score.reshape(target_shape)
+        x = self.l1(torch.cat((x_embed, score), -1))
         if not isinstance(states, MambaState):
             states = self.state_encoder.init_state(x.shape[0], x.device, x.dtype)
         _, states = self.state_encoder(x, states)

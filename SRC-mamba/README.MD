@@ -9,6 +9,7 @@
 - [Script Description](#script-description)
     - [Script and Sample Code](#script-and-sample-code)
     - [Script Parameters](#script-parameters)
+    - [Preparing ASSISTments Problem Logs](#preparing-assistments-problem-logs)
 - [Model Description](#model-description)
     - [Performance](#performance)
         - [Training Performance](#training-performance)
@@ -64,8 +65,17 @@ After installing the dependencies, you can start training and evaluation as foll
   # Build Simulator first
   python trainDKT.py -d dataset -m model
   # Train the SRC agent with the simulator
-  python trainSRC.py -d dataset -p path_type 
+  python trainSRC.py -d dataset -p path_type
   ```
+
+The checkpoints written by `trainDKT.py` land in the `SavedModels/` folder
+using the pattern `<model>_<dataset>.pt`, because the trainer builds
+`exp_name` from the selected model and dataset before appending the `.pt`
+suffix.【F:SRC-mamba/KTScripts/options.py†L48-L93】 Therefore, switching to
+CoKT produces `CoKT_<dataset>.pt` (for example, `CoKT_assist17.pt`). If a
+run still leaves a file such as `DKT_assist17.pt`, it means the simulator was
+started with the default `-m DKT`, so double-check the CLI flags or any code
+overrides that set `args.model`.
 # [Script Description](#contents)
 
 ## [Script and Sample Code](#contents)
@@ -112,6 +122,50 @@ See [KTScripts/options.py](./KTScripts/options.py) for detailed parameters and e
 - Parameters of trainSRC.py and trainMPC.py
 
 See [Scripts/options.py](./Scripts/options.py) for detailed parameters and explanations
+
+## [Preparing ASSISTments Problem Logs](#contents)
+
+To convert the ASSISTments 2012 problem-log export into the `.npz` + concept
+mapping pair used by SRC, place the raw CSV anywhere on disk and run:
+
+```bash
+python Scripts/prepare_assist2012.py \
+  --input /path/to/assistments_problem_log.csv \
+  --output-dir data/assist2012
+```
+
+The `--input` flag must point to the CSV that contains the columns such as
+`problem_log_id`, `skill`, `assistment_id`, `answer_text`, and the confidence
+scores shown in the example. The script writes `assist2012.npz` and
+`knowledge_concept_mapping_assist2012.csv` into `--output-dir` (defaulting to
+the directory where the CSV lives).
+
+To process the tab-separated ASSISTments 2017 (ITEST) export, run:
+
+```bash
+python Scripts/prepare_assist2017.py \
+  --input /path/to/assistments_itest.tsv \
+  --output-dir data/assist2017
+```
+
+The script automatically fabricates the columns that are missing from the
+compact 2017 schema (e.g. numeric skill identifiers, attempt counters, hint
+counts) and produces `assist2017.npz` alongside
+`knowledge_concept_mapping_assist2017.csv` in the chosen output directory.
+
+After preparing one or more datasets you can generate a Markdown table with the
+headline statistics (learners, exercises, concepts, interaction counts, and
+average sequence lengths) using:
+
+```bash
+python Scripts/dataset_statistics.py \
+  --dataset ASSIST09=data/assist09 \
+  --dataset ASSIST12=/path/to/assist2012 \
+  --dataset "SLP-Math=/data/slp"
+```
+
+When given a directory the tool searches for `<name>.npz` inside it. Specify
+`--format csv` or `--format tsv` to export delimited text instead of Markdown.
 
 
 # [Model Description](#contents)
