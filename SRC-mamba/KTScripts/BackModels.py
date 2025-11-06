@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============================================================================
-from typing import Callable, Optional
+from typing import Callable, Optional, Sequence
 
 import math
 import torch
@@ -23,7 +23,7 @@ import torch.nn.functional as F
 class MLP(nn.Sequential):
     def __init__(self,
                  in_channels: int,
-                 hidden_channels: list[int],
+                 hidden_channels: Sequence[int],
                  norm_layer: Optional[Callable[..., nn.Module]] = nn.BatchNorm1d,
                  activation_layer: Optional[Callable[..., nn.Module]] = nn.LeakyReLU,
                  bias: bool = True,
@@ -221,6 +221,9 @@ class CoKT(nn.Module):
         concat_input = torch.cat((intra_x[:, -1:], o), dim=-1)
         if intra_h_p is not None:
             hidden = intra_h_p[:, -1, :-1].unsqueeze(0)
+            # ``torch.cat`` and masked indexing may return non-contiguous tensors,
+            # so ensure the GRU receives a contiguous hidden state.
+            hidden = hidden.contiguous()
         else:
             hidden = None
         intra_h_next, hidden_next = self.rnn(concat_input, hidden)

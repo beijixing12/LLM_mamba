@@ -1,26 +1,37 @@
 from __future__ import annotations
 
+"""Prepare the ASSISTments 2012 problem log export.
+
+This script mirrors the preprocessing pipeline implemented in
+``prepare_assist2009.py`` but tweaks the column defaults and output naming so
+that the "problem log" style export (which labels concepts through the
+``skill`` column and orders records by ``problem_log_id``) can be converted
+without modifying the original helper.
+
+Running the script will generate two files next to the raw CSV (or inside the
+directory passed with ``--output-dir``):
+
+* ``assist2012.npz``
+* ``knowledge_concept_mapping_assist2012.csv``
+
+Both artefacts follow the exact structure produced by the original
+ASSISTments 2009 preprocessor so downstream tooling can consume them without
+changes.
+"""
+
 import argparse
 import csv
 import json
-from collections import OrderedDict
+from collections import Counter, OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 
 def _parse_multi_value(cell: object) -> List[int]:
-    """Parse a cell that may contain multiple integer ids.
-
-    The ASSISTments data stores multiple skill identifiers in a single cell and
-    separates them with ``~~``.  The routine is defensive: empty strings,
-    ``NaN`` values and ``None`` all translate to an empty list.  Numeric values
-    (``int`` or ``float``) are accepted as well.
-    """
-
     if cell is None:
         return []
     if isinstance(cell, (int, float)):
@@ -28,25 +39,22 @@ def _parse_multi_value(cell: object) -> List[int]:
             return []
         return [int(cell)]
 
-    parts = []
+    parts: List[str]
     if isinstance(cell, str):
         stripped = cell.strip()
         if not stripped or stripped.lower() == "nan":
             return []
         parts = [p for p in stripped.replace(" ", "").split("~~") if p]
-    elif cell is not None:
-        parts = [str(cell)]
+    else:
+        parts = [str(cell)] if cell is not None else []
 
-    ids = []
+    ids: List[int] = []
     for part in parts:
         try:
             parsed = int(float(part))
         except ValueError:
-            # If the part cannot be converted, we silently skip it to avoid
-            # crashing the preprocessing pipeline on malformed rows.
-            pass
-        else:
-            ids.append(parsed)
+            continue
+        ids.append(parsed)
     return ids
 
 
@@ -59,40 +67,6 @@ def _parse_multi_name(cell: object) -> List[str]:
     if not text or text.lower() == "nan":
         return []
     return [p.strip() for p in text.split("~~") if p.strip()]
-
-
-def _guess_default_input() -> Path | None:
-    """Try to locate a reasonable default ASSISTments CSV file."""
-
-    candidate_names = [
-        "skill_builder_data_corrected.csv",
-        "skill_builder_data.csv",
-    ]
-    script_dir = Path(__file__).resolve().parent
-    search_roots = [
-        Path.cwd(),
-        Path.cwd() / "data",
-        Path.cwd() / "dataset",
-        Path.cwd() / "datasets",
-        script_dir,
-        script_dir.parent,
-        script_dir.parent / "data",
-    ]
-
-    seen: set[Path] = set()
-    for root in search_roots:
-        try:
-            root = root.resolve()
-        except FileNotFoundError:
-            continue
-        if root in seen or not root.exists():
-            continue
-        seen.add(root)
-        for name in candidate_names:
-            candidate = root / name
-            if candidate.exists():
-                return candidate
-    return None
 
 
 @dataclass
@@ -122,7 +96,6 @@ def _coerce_to_int(value: object, default: int) -> int:
         if pd.isna(value):
             return default
     except TypeError:
-        # Objects that do not support ``pd.isna`` fall back to conversion.
         pass
 
     try:
@@ -139,8 +112,6 @@ def load_raw_dataset(path: Path, *, order_column: str, encoding: str | None = No
         tried_encodings.append(encoding)
         df = pd.read_csv(path, encoding=encoding, **read_kwargs)
     else:
-        # Attempt UTF-8 first (the encoding advertised by the dataset) and
-        # gracefully fall back to common legacy encodings when that fails.
         candidates = ["utf-8", "utf-8-sig", "latin1", "cp1252"]
         last_error: UnicodeDecodeError | None = None
         for candidate in candidates:
@@ -200,13 +171,17 @@ def build_examples(
         required_columns.append(response_time_column)
     else:
         response_time_column = first_time_column
+
     missing = [col for col in required_columns if col not in df.columns]
     if missing:
         raise ValueError(f"Missing required columns: {', '.join(missing)}")
 
     for user_id, group in df.groupby("user_id"):
         school_values = group.get("school_id")
-        school_id = int(next((v for v in school_values if not pd.isna(v)), -1)) if school_values is not None else -1
+        if school_values is not None:
+            school_id = int(next((v for v in school_values if not pd.isna(v)), -1))
+        else:
+            school_id = -1
 
         question_seq: List[int] = []
         skill_seq: List[int] = []
@@ -233,9 +208,6 @@ def build_examples(
                     candidate = sname_list[idx].strip()
 
                 if sid not in concept_mapping:
-                    # Store the first observed name, even if it is temporarily
-                    # empty. A later interaction may include a proper concept
-                    # label which we promote below.
                     concept_mapping[sid] = candidate
                 else:
                     existing = concept_mapping[sid]
@@ -285,17 +257,119 @@ def build_examples(
     return examples, concept_mapping
 
 
+def _load_graph_concepts(graph_path: Path) -> List[str]:
+    with graph_path.open("r", encoding="utf8") as handle:
+        data = json.load(handle)
+
+    edges: Iterable[Dict[str, object]] = data.get("prerequisite_edges", [])  # type: ignore[assignment]
+    concepts: "OrderedDict[str, None]" = OrderedDict()
+    for edge in edges:
+        for key in ("head", "tail"):
+            name = str(edge.get(key, "")).strip()
+            if not name:
+                continue
+            if name not in concepts:
+                concepts[name] = None
+
+    return list(concepts)
+
+
+def _resolve_prerequisite_graph(path: Optional[Path]) -> Optional[Path]:
+    if path is not None:
+        candidate = path.expanduser().resolve()
+        if candidate.is_file():
+            return candidate
+        raise FileNotFoundError(f"Prerequisite graph not found: {candidate!s}")
+
+    script_dir = Path(__file__).resolve().parent
+    candidates = [
+        Path.cwd() / "prerequisites_graph.json",
+        Path.cwd() / "data" / "prerequisites_graph.json",
+        Path.cwd() / "data" / "assist09" / "prerequisites_graph.json",
+        script_dir / "prerequisites_graph.json",
+        script_dir / "data" / "assist09" / "prerequisites_graph.json",
+        script_dir.parent / "data" / "assist09" / "prerequisites_graph.json",
+    ]
+
+    for candidate in candidates:
+        try:
+            resolved = candidate.resolve()
+        except FileNotFoundError:
+            continue
+        if resolved.is_file():
+            return resolved
+
+    return None
+
+
+def align_concepts_with_graph(
+    examples: Sequence[SequenceExample],
+    concept_mapping: "OrderedDict[int, str]",
+    graph_concepts: Sequence[str],
+) -> Tuple[Sequence[SequenceExample], "OrderedDict[int, str]", List[int], Dict[str, object]]:
+    name_to_graph_index: Dict[str, int] = {}
+    lowered_to_graph_index: Dict[str, int] = {}
+    for idx, name in enumerate(graph_concepts):
+        name_to_graph_index[name] = idx
+        lowered_to_graph_index[name.lower()] = idx
+
+    aligned_names: List[str] = list(graph_concepts)
+    extra_name_to_id: Dict[str, int] = {}
+    skill_to_new: Dict[int, int] = {}
+    missing_name_ids: List[int] = []
+    unmapped_counts: Counter[str] = Counter()
+    matched = 0
+
+    def _register_extra(name: str) -> int:
+        if name in extra_name_to_id:
+            return extra_name_to_id[name]
+        new_id = len(aligned_names)
+        extra_name_to_id[name] = new_id
+        aligned_names.append(name)
+        return new_id
+
+    placeholder_index = 0
+
+    for old_id, raw_name in concept_mapping.items():
+        name = raw_name.strip()
+        if name:
+            lookup = name_to_graph_index.get(name)
+            if lookup is None:
+                lookup = lowered_to_graph_index.get(name.lower())
+            if lookup is not None:
+                skill_to_new[old_id] = lookup
+                matched += 1
+                continue
+            unmapped_counts[name] += 1
+            new_id = _register_extra(name)
+        else:
+            placeholder = f"__missing_skill_name_{placeholder_index}"
+            placeholder_index += 1
+            new_id = _register_extra(placeholder)
+            missing_name_ids.append(new_id)
+        skill_to_new[old_id] = new_id
+
+    for example in examples:
+        example.skill_seq = [skill_to_new[sid] for sid in example.skill_seq]
+        example.learning_goals = [skill_to_new[sid] for sid in example.learning_goals]
+
+    ordered_mapping: "OrderedDict[int, str]" = OrderedDict(
+        (idx, name) for idx, name in enumerate(aligned_names)
+    )
+
+    report = {
+        "matched": matched,
+        "introduced": len(aligned_names) - len(graph_concepts),
+        "unmapped_counts": unmapped_counts,
+    }
+
+    return examples, ordered_mapping, missing_name_ids, report
+
+
 def reindex_concepts(
     examples: Sequence[SequenceExample],
     concept_mapping: "OrderedDict[int, str]",
-) -> Tuple[
-    Sequence[SequenceExample],
-    "OrderedDict[int, str]",
-    List[int],
-
-]:
-    """Remap concept identifiers so they are contiguous and zero-based."""
-
+) -> Tuple[Sequence[SequenceExample], "OrderedDict[int, str]", List[int]]:
     old_to_new: Dict[int, int] = {}
     new_mapping: "OrderedDict[int, str]" = OrderedDict()
     missing_name_ids: List[int] = []
@@ -312,9 +386,8 @@ def reindex_concepts(
 
     return examples, new_mapping, missing_name_ids
 
-def drop_missing_skill_names(df: pd.DataFrame, *, skill_name_column: str) -> Tuple[pd.DataFrame, int]:
-    """Remove interactions whose skill names are missing or blank."""
 
+def drop_missing_skill_names(df: pd.DataFrame, *, skill_name_column: str) -> Tuple[pd.DataFrame, int]:
     if skill_name_column not in df.columns:
         return df, 0
 
@@ -343,25 +416,6 @@ def handle_missing_values(
     drop_columns: Sequence[str],
     fill_defaults: Dict[str, object],
 ) -> Tuple[pd.DataFrame, Dict[str, object]]:
-    """Normalise missing values according to the requested strategy.
-
-    Parameters
-    ----------
-    df:
-        Raw dataframe to clean. A shallow copy is created when rows must be
-        removed.
-    strategy:
-        Either ``"impute"`` (replace missing values in ``fill_defaults`` with
-        the provided defaults) or ``"drop"`` (discard rows where those columns
-        are missing).
-    drop_columns:
-        Columns that must be present. Rows where these columns are missing are
-        always discarded.
-    fill_defaults:
-        Mapping of column names to the value that should replace missing
-        entries when ``strategy`` is ``"impute"``.
-    """
-
     if strategy not in {"impute", "drop"}:
         raise ValueError(f"Unsupported missing value strategy: {strategy}")
 
@@ -441,26 +495,33 @@ def write_mapping(path: Path, mapping: Dict[int, str]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Prepare the ASSISTments 2009 dataset")
+    parser = argparse.ArgumentParser(
+        description="Prepare the ASSISTments 2012 problem log dataset",
+    )
     parser.add_argument(
         "--input",
         type=Path,
-        default=None,
-        help="Path to the raw ASSISTments CSV file. If omitted, the script will search for a default",
+        required=True,
+        help="Path to the raw ASSISTments problem log CSV file",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="Directory where the processed files will be stored (defaults to the current working directory)",
+        help="Directory where the processed files will be stored (defaults to the CSV directory)",
     )
     parser.add_argument(
         "--dataset-name",
         type=str,
-        default="assist2009",
+        default="assist2012",
         help="Base name used for the generated .npz file",
     )
-    parser.add_argument("--order-column", type=str, default="order_id", help="Column used to sort a learner's history")
+    parser.add_argument(
+        "--order-column",
+        type=str,
+        default="problem_log_id",
+        help="Column used to sort a learner's history",
+    )
     parser.add_argument("--question-column", type=str, default="assistment_id")
     parser.add_argument("--attempt-column", type=str, default="attempt_count")
     parser.add_argument("--correctness-column", type=str, default="correct")
@@ -468,7 +529,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--response-time-column", type=str, default="ms_first_response")
     parser.add_argument("--hint-column", type=str, default="hint_count")
     parser.add_argument("--skill-id-column", type=str, default="skill_id")
-    parser.add_argument("--skill-name-column", type=str, default="skill_name")
+    parser.add_argument("--skill-name-column", type=str, default="skill")
     parser.add_argument(
         "--missing-strategy",
         choices=("impute", "drop"),
@@ -491,49 +552,35 @@ def parse_args() -> argparse.Namespace:
         help="Optional custom path for the concept-id mapping CSV",
     )
     parser.add_argument(
+        "--prerequisite-graph",
+        type=Path,
+        default=None,
+        help=(
+            "Path to a prerequisite graph JSON used to align skill identifiers. "
+            "When omitted, the script will search common locations for "
+            "'prerequisites_graph.json'."
+        ),
+    )
+    parser.add_argument(
         "--write-summary",
         action="store_true",
         help="If set, create a JSON file with dataset statistics for quick inspection",
     )
-    args = parser.parse_args()
-
-    if args.input is None:
-        guessed = _guess_default_input()
-        if guessed is None:
-            parser.error(
-                "--input was not provided and no default ASSISTments CSV could be located. "
-                "Place 'skill_builder_data_corrected.csv' (or 'skill_builder_data.csv') in the working directory "
-                "or pass --input explicitly."
-            )
-        print(f"Auto-detected input dataset: {guessed}")
-        args.input = guessed
-    else:
-        args.input = args.input.expanduser().resolve()
-
-    if args.output_dir is None:
-        # Store the processed files next to the raw CSV by default so users can
-        # easily discover the generated outputs without having to inspect the
-        # current working directory from which the script was launched.
-        args.output_dir = args.input.parent if isinstance(args.input, Path) else Path.cwd()
-    else:
-        args.output_dir = args.output_dir.expanduser().resolve()
-
-    return args
+    return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    output_dir = args.output_dir
-    if output_dir is None:
-        # ``parse_args`` should already normalise the directory, but keep a
-        # defensive fallback so imports that bypass the CLI handling still work.
-        output_dir = Path.cwd()
-    elif not isinstance(output_dir, Path):
-        output_dir = Path(output_dir)
+
+    input_path = args.input.expanduser().resolve()
+    if args.output_dir is None:
+        output_dir = input_path.parent
+    else:
+        output_dir = args.output_dir.expanduser().resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
     raw_df = load_raw_dataset(
-        args.input,
+        input_path,
         order_column=args.order_column,
         encoding=args.encoding,
     )
@@ -567,12 +614,32 @@ def main() -> None:
         skill_name_column=args.skill_name_column,
     )
 
-    examples, reindexed_mapping, missing_name_ids = reindex_concepts(examples, mapping)
+    graph_path = _resolve_prerequisite_graph(args.prerequisite_graph)
+    alignment_report: Dict[str, object] | None = None
+    graph_concepts: List[str] | None = None
+    if graph_path is not None:
+        try:
+            graph_concepts = _load_graph_concepts(graph_path)
+        except (OSError, json.JSONDecodeError) as exc:
+            print(
+                "Warning: failed to read prerequisite graph %s (%s). Falling back to sequential remapping." %
+                (graph_path, exc),
+            )
+            graph_concepts = None
+
+    if graph_concepts:
+        examples, reindexed_mapping, missing_name_ids, alignment_report = align_concepts_with_graph(
+            examples,
+            mapping,
+            graph_concepts,
+        )
+    else:
+        examples, reindexed_mapping, missing_name_ids = reindex_concepts(examples, mapping)
 
     dataset_path = output_dir / f"{args.dataset_name}.npz"
     mapping_path = args.mapping_file
     if mapping_path is None:
-        mapping_path = output_dir / "knowledge_concept_mapping.csv"
+        mapping_path = output_dir / "knowledge_concept_mapping_assist2012.csv"
     elif not mapping_path.is_absolute():
         mapping_path = output_dir / mapping_path
 
@@ -581,6 +648,24 @@ def main() -> None:
 
     print(f"Saved processed dataset to {dataset_path}")
     print(f"Saved concept mapping to {mapping_path}")
+    if graph_concepts is not None and graph_path is not None and alignment_report is not None:
+        print(
+            "Aligned skills to prerequisite graph %s (matched %d concepts, introduced %d new concepts)."
+            % (
+                graph_path,
+                alignment_report.get("matched", 0),
+                alignment_report.get("introduced", 0),
+            )
+        )
+        unmapped_counts: Counter[str] = alignment_report.get("unmapped_counts", Counter())  # type: ignore[assignment]
+        if unmapped_counts:
+            top_unmapped = ", ".join(
+                f"{name} ({count})" for name, count in unmapped_counts.most_common(5)
+            )
+            print(
+                "Warning: %d concept names were not present in the graph (top entries: %s)"
+                % (sum(unmapped_counts.values()), top_unmapped)
+            )
     if missing_report["dropped_rows"]:
         drop_details = [
             f"{col}: {count}"
@@ -640,6 +725,14 @@ def main() -> None:
                 for new_id in missing_name_ids
             ],
         }
+        if graph_concepts is not None and graph_path is not None and alignment_report is not None:
+            unmapped_counts: Counter[str] = alignment_report.get("unmapped_counts", Counter())  # type: ignore[assignment]
+            summary["graph_alignment"] = {
+                "graph_path": str(graph_path),
+                "matched": alignment_report.get("matched", 0),
+                "introduced": alignment_report.get("introduced", 0),
+                "unmapped_names": {name: int(count) for name, count in unmapped_counts.items()},
+            }
         summary_path = output_dir / "dataset_summary.json"
         summary_path.write_text(json.dumps(summary, indent=2), encoding="utf8")
         print(f"Saved dataset summary to {summary_path}")
@@ -647,3 +740,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
