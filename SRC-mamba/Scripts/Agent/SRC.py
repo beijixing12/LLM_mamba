@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import Optional, Union
+import warnings
 import torch
 from torch import nn
 from Scripts.Agent.mamba_sequence import MambaSequenceModel, MambaState
@@ -8,6 +9,7 @@ from Scripts.graph_encoder import (
     GraphFusionEncoder,
     load_prerequisite_graph,
     load_similarity_graph,
+    load_triplet_graph,
 )
 
 def _resolve_graph_path(
@@ -21,6 +23,8 @@ def _resolve_graph_path(
 
     if provided is not None:
         path = Path(provided)
+        if not path.is_absolute():
+            path = (base_dir / path).resolve()
         if path.is_file():
             return path
         if path.exists():
@@ -84,13 +88,15 @@ def _resolve_graph_path(
             if short_form not in dataset_hints:
                 dataset_hints.append(short_form)
     dataset_hint_tokens = {hint.lower() for hint in dataset_hints}
+    deferred_children: list[Path] = []
+
     for root in candidate_roots:
         _add_candidate(root / filename)
         _add_candidate(root / "graphs" / filename)
         for hint in dataset_hints:
             _add_candidate(root / hint / filename)
             _add_candidate(root / hint / "graphs" / filename)
-            
+
         try:
             for child in root.iterdir():
                 if not child.is_dir():
@@ -102,13 +108,28 @@ def _resolve_graph_path(
                         token == child_token or token in child_token
                         for token in dataset_hint_tokens
                     )
-                    if not matched:
+                    if matched:
+                        _add_candidate(child / filename)
+                        _add_candidate(child / "graphs" / filename)
                         continue
-                _add_candidate(child / filename)
-                _add_candidate(child / "graphs" / filename)
+                deferred_children.append(child)
         except OSError:
             # The root might not exist or be inaccessible; skip gracefully.
             pass
+
+    for child in deferred_children:
+        _add_candidate(child / filename)
+        _add_candidate(child / "graphs" / filename)
+
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+
+    searched = "\n".join(f" - {path}" for path in candidates)
+    raise FileNotFoundError(
+        f"Unable to locate {filename!r}. Checked the following locations relative to"
+        f" {base_dir}:\n{searched if searched else ' (no candidates generated)'}"
+    )
 
 class SRC(nn.Module):
     def __init__(
@@ -121,10 +142,11 @@ class SRC(nn.Module):
         allow_repeat=False,
         with_kt=False,
         *,
-        prerequisite_graph_path=None,
-        similarity_graph_path=None,
+        prerequisite_graph_path: Optional[Union[Path, str]] = None,
+        similarity_graph_path: Optional[Union[Path, str]] = None,
         dataset_name: Optional[str] = None,
         data_dir: Optional[Union[Path, str]] = None,
+        hetero_graph_path: Optional[Union[Path, str]] = None,
         dgcn_layers=2,
         lightgcn_layers=2,
         fusion_weight=0.5,
@@ -132,31 +154,80 @@ class SRC(nn.Module):
     ):
         super().__init__()
         base_dir = Path(__file__).resolve().parents[2]
-        # prerequisite_graph_file = _resolve_graph_path(
-        #     prerequisite_graph_path,
-        #     base_dir,
-        #     "prerequisites_graph.json",
-        #     data_dir=data_dir,
-        #     dataset=dataset_name,
-        # )
+        prerequisite_graph_file = _resolve_graph_path(
+            prerequisite_graph_path,
+            base_dir,
+            "prerequisites_graph.json",
+            data_dir=data_dir,
+            dataset=dataset_name,
+        )
 
-        # similarity_graph_file = _resolve_graph_path(
-        #     similarity_graph_path,
-        #     base_dir,
-        #     "similarity_graph.json",
-        #     data_dir=data_dir,
-        #     dataset=dataset_name,
-        # )
-        prerequisite_graph_file = '/home/zengxiangyu/SRC-py/data/assist09/prerequisites_graph.json'
-        similarity_graph_file = '/home/zengxiangyu/SRC-py/data/assist09/similarity_graph.json'
+        similarity_graph_file = _resolve_graph_path(
+            similarity_graph_path,
+            base_dir,
+            "similarity_graph.json",
+            data_dir=data_dir,
+            dataset=dataset_name,
+        )
+        hetero_graph_file = None
+        if hetero_graph_path is not None:
+            candidate = Path(hetero_graph_path)
+            if not candidate.is_absolute():
+                candidate = (base_dir / candidate).resolve()
+            if candidate.is_file():
+                hetero_graph_file = candidate
+            else:
+                warnings.warn(
+                    f"Provided hetero graph path {hetero_graph_path!r} is not a file",
+                    RuntimeWarning,
+                )
+        elif dataset_name:
+            dataset_hint = dataset_name if dataset_name.endswith(".npz") else f"{dataset_name}.npz"
+            try:
+                hetero_graph_file = _resolve_graph_path(
+                    None,
+                    base_dir,
+                    dataset_hint,
+                    data_dir=data_dir,
+                    dataset=dataset_name,
+                )
+            except FileNotFoundError:
+                hetero_graph_file = None
+                warnings.warn(
+                    "Unable to locate dataset archive for heterogeneous graph construction; "
+                    "falling back to similarity graph only.",
+                    RuntimeWarning,
+                )
         prerequisite_graph = load_prerequisite_graph(prerequisite_graph_file)
         similarity_graph = load_similarity_graph(similarity_graph_file)
-        
+        hetero_graph = None
+        if hetero_graph_file is not None:
+            try:
+                hetero_graph = load_triplet_graph(hetero_graph_file)
+            except FileNotFoundError:
+                warnings.warn(
+                    f"Heterogeneous graph not found at {hetero_graph_file}; "
+                    "falling back to similarity-only propagation.",
+                    RuntimeWarning,
+                )
+            except ValueError as exc:
+                warnings.warn(
+                    f"Failed to load heterogeneous graph ({exc}); using similarity graph only.",
+                    RuntimeWarning,
+                )
+            except KeyError as exc:
+                warnings.warn(
+                    f"Heterogeneous graph archive {hetero_graph_file} missing required column ({exc}); "
+                    "falling back to similarity graph only.",
+                    RuntimeWarning,
+                )
+
         self.graph_encoder = GraphFusionEncoder(
             skill_num=skill_num,
             embedding_dim=input_size,
             prerequisite_graph=prerequisite_graph,
             similarity_graph=similarity_graph,
+            hetero_graph=hetero_graph,
             dgcn_layers=dgcn_layers,
             lightgcn_layers=lightgcn_layers,
             fusion_weight=fusion_weight,
@@ -281,7 +352,9 @@ class SRC(nn.Module):
             if self.withKt and self.training:
                 hidden_states.append(hidden)
                 hidden_states = torch.cat(hidden_states, dim=1)
-                kt_output = torch.sigmoid(self.ktMlp(hidden_states))
+                batch, steps, width = hidden_states.shape
+                kt_logits = self.ktMlp(hidden_states.view(batch * steps, width))
+                kt_output = torch.sigmoid(kt_logits).view(batch, steps, -1)
                 result = [paths, probs, selecting_s, kt_output]
                 return result
             return paths, probs, selecting_s

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============================================================================
-from typing import Callable, Optional
+from typing import Callable, Optional, Sequence
 
 import math
 import torch
@@ -23,7 +23,7 @@ import torch.nn.functional as F
 class MLP(nn.Sequential):
     def __init__(self,
                  in_channels: int,
-                 hidden_channels: list[int],
+                 hidden_channels: Sequence[int],
                  norm_layer: Optional[Callable[..., nn.Module]] = nn.BatchNorm1d,
                  activation_layer: Optional[Callable[..., nn.Module]] = nn.LeakyReLU,
                  bias: bool = True,
